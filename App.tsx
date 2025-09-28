@@ -321,9 +321,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-slate-900 text-gray-300 font-sans">
+    <div className="flex flex-col bg-slate-900 text-gray-300 font-sans">
       <Header />
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex">
         <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-r border-slate-700/50">
           <ConversationSidebar 
             conversations={conversations}
@@ -348,7 +348,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-4 overflow-y-auto border-l border-slate-700/50">
+        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-4 border-l border-slate-700/50">
           <SettingsTab />
         </div>
       </main>
