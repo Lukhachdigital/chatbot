@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
 import SettingsTab from './components/SettingsTab';
@@ -17,11 +18,12 @@ const App: React.FC = () => {
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
   const [showApiKeyPrompt, setShowApiKeyPrompt] = useState(false);
   const [selectedModel, setSelectedModel] = useState<ModelType>('gemini');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const ai = useMemo(() => googleApiKey ? new GoogleGenAI({ apiKey: googleApiKey }) : null, [googleApiKey]);
 
+  // Effect 1: Load all persistent state from localStorage on initial mount
   useEffect(() => {
-    // Load all persistent state from localStorage on initial mount
     const savedGoogleKey = localStorage.getItem('googleApiKey');
     if (savedGoogleKey) setGoogleApiKey(savedGoogleKey);
     
@@ -36,58 +38,81 @@ const App: React.FC = () => {
 
     try {
       const savedConvs = localStorage.getItem('chatbotConversations');
-      const parsedConvs = savedConvs ? JSON.parse(savedConvs) : {};
-      
-      if (ai) {
-          for (const convId in parsedConvs) {
-              if (parsedConvs[convId].messages) { // Ensure messages exist before creating chat history
-                  parsedConvs[convId].chat = ai.chats.create({ 
-                      model: 'gemini-2.5-flash',
-                      history: parsedConvs[convId].messages
-                        .filter((msg: Message) => (msg.role === 'user' || msg.role === 'model') && msg.parts.length > 0) 
-                        .map((msg: Message) => ({
-                            role: msg.role,
-                            parts: msg.parts.map(part => 'text' in part ? { text: part.text } : part)
-                        }))
-                  });
-              }
-          }
-      }
-      setConversations(parsedConvs);
+      setConversations(savedConvs ? JSON.parse(savedConvs) : {});
     } catch (error) {
       console.error("Failed to load conversations from localStorage", error);
       setConversations({});
     }
-  }, [ai]);
+    
+    setIsLoaded(true); // Signal that initial load is complete
+  }, []); // Empty dependency array ensures this runs only once on mount
 
+  // Effect 2: Reconstruct chat sessions for Gemini when the AI is ready and data has been loaded
   useEffect(() => {
-    // Save conversations whenever they change
+    if (!ai || !isLoaded) return;
+
+    setConversations(prevConvs => {
+      // FIX: Explicitly type the destructured 'conv' parameter to ensure it's treated as a 'Conversation' object.
+      // This resolves errors where properties like 'messages' and 'chat' were not recognized.
+      const convsToUpdate = Object.entries(prevConvs)
+          .filter(([, conv]: [string, Conversation]) => conv.messages && !conv.chat);
+
+      if (convsToUpdate.length === 0) {
+          return prevConvs; // No changes needed
+      }
+
+      const updatedConvs = { ...prevConvs };
+      convsToUpdate.forEach(([convId, conv]) => {
+          updatedConvs[convId] = {
+              ...conv,
+              chat: ai.chats.create({ 
+                  model: 'gemini-2.5-flash',
+                  history: conv.messages
+                    .filter((msg: Message) => (msg.role === 'user' || msg.role === 'model') && msg.parts.length > 0) 
+                    .map((msg: Message) => ({
+                        role: msg.role,
+                        parts: msg.parts.map(part => 'text' in part ? { text: part.text } : part)
+                    }))
+              })
+          };
+      });
+      return updatedConvs;
+    });
+  }, [ai, isLoaded]);
+
+  // Effect 3: Save conversations whenever they change, but only after initial load is complete
+  useEffect(() => {
+    if (!isLoaded) return;
     try {
-      const conversationsToSave = Object.entries(conversations).reduce((acc, [key, value]) => {
+      // FIX: Explicitly type the destructured 'value' parameter as 'Conversation' in the reduce callback.
+      // This resolves the error when destructuring '{ chat, ...rest }' from 'value'.
+      const conversationsToSave = Object.entries(conversations).reduce((acc, [key, value]: [string, Conversation]) => {
           const { chat, ...rest } = value;
           acc[key] = rest;
           return acc;
       }, {} as Record<string, Omit<Conversation, 'chat'>>);
 
-      localStorage.setItem('chatbotConversations', JSON.stringify(conversationsToSave));
+      localStorage.setItem('chatbotConversations', JSON.stringify(conversationsTosave));
     } catch (error) {
         console.error("Failed to save conversations to localStorage", error);
     }
-  }, [conversations]);
+  }, [conversations, isLoaded]);
 
+  // Effect 4: Save the active conversation ID, but only after initial load
   useEffect(() => {
-    // Save the active conversation ID whenever it changes
+    if (!isLoaded) return;
     if (activeConversationId) {
       localStorage.setItem('activeConversationId', activeConversationId);
     } else {
       localStorage.removeItem('activeConversationId');
     }
-  }, [activeConversationId]);
+  }, [activeConversationId, isLoaded]);
 
+  // Effect 5: Save the selected model, but only after initial load
   useEffect(() => {
-    // Save the selected model whenever it changes
+    if (!isLoaded) return;
     localStorage.setItem('selectedModel', selectedModel);
-  }, [selectedModel]);
+  }, [selectedModel, isLoaded]);
 
 
   const handleGoogleApiKeyChange = (newKey: string) => {
