@@ -1,0 +1,7 @@
+{
+  "name": "Copy of AI Chatbot",
+  "description": "An intelligent, multi-modal chatbot using Gemini and OpenAI APIs.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
