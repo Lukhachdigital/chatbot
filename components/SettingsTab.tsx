@@ -89,10 +89,6 @@ const SettingsTab: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="w-full">
-        <h3 className="text-lg font-bold text-white mb-4 text-center">Contact</h3>
-        <p className="text-center text-gray-400 mb-6 text-sm">
-          Connect with Làm Youtube AI for support.
-        </p>
         <div className="grid grid-cols-2 gap-3">
           <SocialLink platform="Youtube" handle="@lukhach-digital" url="https://youtube.com/@lukhach-digital" icon={YoutubeIcon} />
           <SocialLink platform="Facebook" handle="lukhach.com.vn" url="https://facebook.com/lukhach.com.vn" icon={FacebookIcon} />
