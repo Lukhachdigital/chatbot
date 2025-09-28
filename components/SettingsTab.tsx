@@ -108,7 +108,7 @@ const SettingsTab: React.FC = () => {
           <div className="space-y-4">
             {videosLoading ? (
               Array.from({ length: 2 }).map((_, index) => (
-                <div key={index} className="aspect-video w-full bg-slate-700/50 rounded-lg flex items-center justify-center animate-pulse">
+                <div key={index} className="aspect-video w-full bg-slate-700/50 rounded-lg flex items-center justify-center">
                    <p className="text-sm text-gray-400">Loading Video...</p>
                 </div>
               ))
