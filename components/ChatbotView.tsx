@@ -15,6 +15,7 @@ interface ChatbotViewProps {
   onOpenAiApiKeyChange: (key: string) => void;
   selectedModel: ModelType;
   onSelectModel: (model: ModelType) => void;
+  onChatFocus: () => void;
 }
 
 const InlineApiKeyPrompt: React.FC<{
@@ -27,7 +28,7 @@ const InlineApiKeyPrompt: React.FC<{
     const [tempOpenAiKey, setTempOpenAiKey] = useState(openAiApiKey);
 
     return (
-        <div className="p-4 border-b border-slate-700 bg-slate-900/50">
+        <div className="p-4 border-b border-slate-700 bg-slate-900/50 animate-fade-in">
             <div className="max-w-2xl mx-auto space-y-4">
                  <p className="text-center font-semibold text-yellow-400">
                     Vui lòng nhập API key để bắt đầu cuộc trò chuyện.
@@ -99,6 +100,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
     onOpenAiApiKeyChange,
     selectedModel,
     onSelectModel,
+    onChatFocus,
 }) => {
   const [currentInput, setCurrentInput] = useState('');
   const [isSending, setIsSending] = useState(false);
@@ -252,7 +254,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
 
         <div className="p-4 border-t border-slate-700/50 bg-slate-800">
             {attachedFile && (
-                <div className="mb-2 bg-slate-700 p-2 rounded-lg flex items-center justify-between">
+                <div className="mb-2 bg-slate-700 p-2 rounded-lg flex items-center justify-between animate-fade-in">
                     <div className="flex items-center gap-2 overflow-hidden">
                         <img src={attachedFile.preview} alt="file preview" className="w-10 h-10 object-cover rounded flex-shrink-0"/>
                         <span className="text-sm truncate">{attachedFile.name}</span>
@@ -281,6 +283,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                     value={currentInput}
                     onChange={(e) => setCurrentInput(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleLocalSendMessage(); } }}
+                    onFocus={onChatFocus}
                     placeholder="Nhập tin nhắn của bạn..."
                     className="flex-1 bg-transparent focus:outline-none resize-none text-lg p-2"
                     rows={1}
