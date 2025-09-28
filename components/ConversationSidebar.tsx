@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Button from './shared/Button';
 import type { Conversation } from '../App';
@@ -38,8 +39,10 @@ const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
       </Button>
       <div className="flex-grow overflow-y-auto pr-1">
         {Object.values(conversations)
-          .sort((a, b) => parseInt(b.id.split('-')[1]) - parseInt(a.id.split('-')[1]))
-          .map(conv => (
+          // FIX: Explicitly type 'a' and 'b' as 'Conversation' to allow accessing `id` for sorting.
+          .sort((a: Conversation, b: Conversation) => parseInt(b.id.split('-')[1]) - parseInt(a.id.split('-')[1]))
+          // FIX: Explicitly type 'conv' as 'Conversation' to allow accessing its properties in the map function.
+          .map((conv: Conversation) => (
             <div 
               key={conv.id} 
               onClick={() => onSelectConversation(conv.id)}
