@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import Header from './components/Header';
 import SettingsTab from './components/SettingsTab';
@@ -141,6 +140,12 @@ const App: React.FC = () => {
     }
   };
   
+  const handleChatFocus = () => {
+    if (!googleApiKey && !openAiApiKey) {
+        setShowApiKeyPrompt(true);
+    }
+  };
+
   const handleSendMessage = async (userMessage: Message, model: ModelType) => {
     if ((model === 'gemini' && !googleApiKey) || (model === 'openai' && !openAiApiKey)) {
         setShowApiKeyPrompt(true);
@@ -345,6 +350,7 @@ const App: React.FC = () => {
             onOpenAiApiKeyChange={handleOpenAiApiKeyChange}
             selectedModel={selectedModel}
             onSelectModel={setSelectedModel}
+            onChatFocus={handleChatFocus}
           />
         </div>
 
