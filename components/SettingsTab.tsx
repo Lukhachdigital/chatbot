@@ -5,7 +5,7 @@ const SocialLink: React.FC<{ platform: string, url:string, handle: string, icon:
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center space-x-2 p-2 bg-slate-900/50 hover:bg-slate-700/50 border border-slate-700 rounded-lg transition-colors duration-200"
+    className="flex items-center space-x-2 p-2 bg-slate-900/50 hover:bg-slate-700/50 border border-slate-700 rounded-lg"
   >
     <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
       {icon}
@@ -99,7 +99,7 @@ const SettingsTab: React.FC = () => {
             <img 
                 src="https://lamyoutubeai.com/Image/logotool.png" 
                 alt="Làm Youtube AI Logo" 
-                className="w-28 h-28 object-cover rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/30 p-1 bg-slate-800" 
+                className="w-32 h-32 object-cover rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/30 p-1 bg-slate-800" 
             />
         </div>
 
