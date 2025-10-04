@@ -23,7 +23,7 @@ const Header: React.FC = () => {
           <span className="text-white ml-1">AI</span>
         </a>
         <p className="flex-1 text-lg font-semibold text-white text-right truncate pl-6">
-          Tôi là <span className="text-yellow-400">Lữ Khách</span> - Trợ lý đắc lực của bạn
+          Tôi là <span className="text-yellow-400">Huỳnh Xuyên Sơn</span> - Trợ lý đắc lực của bạn
         </p>
       </div>
 
