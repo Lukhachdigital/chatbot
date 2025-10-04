@@ -210,8 +210,9 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
   };
   
   const welcomeMessage = (
-       <div className="flex-1 flex items-center justify-center text-center text-gray-400 p-4">
-            <p>Nhập tin nhắn bên dưới để bắt đầu một cuộc trò chuyện mới.</p>
+       <div className="flex-1 flex flex-col items-center justify-center text-center text-gray-400 p-4 space-y-2">
+            <p className="text-xl font-semibold text-gray-300">Tôi là Lữ Khách - Bạn cần tôi giúp về vấn đề gì?</p>
+            <p>Nhập tin nhắn bên dưới để bắt đầu một cuộc trò chuyện mới cùng tôi</p>
         </div>
   );
 
@@ -232,23 +233,44 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
         
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
             {!activeConversation && welcomeMessage}
-            {activeConversation?.messages.map(msg => (
-                <div key={msg.id} className={`flex items-start gap-3 w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                   {msg.role === 'model' && <img src="https://lamyoutubeai.com/Image/logotool.png" alt="AI logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />}
-                   <div className={`p-3 rounded-lg max-w-3xl text-lg leading-relaxed ${msg.role === 'user' ? 'bg-blue-800 text-white' : 'bg-slate-700'}`}>
-                        {msg.parts.map((part, index) => {
-                            if ('text' in part) {
-                                return <p key={index} className="whitespace-pre-wrap">{part.text || '...'}</p>
-                            }
-                            if ('inlineData' in part && part.inlineData.mimeType.startsWith('image/')) {
-                                return <img key={index} src={`data:${part.inlineData.mimeType};base64,${part.inlineData.data}`} alt="Uploaded content" className="max-w-xs rounded-lg mt-2"/>
-                            }
-                            return null;
-                        })}
-                   </div>
-                   {msg.role === 'user' && <div className="w-8 h-8 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center font-semibold text-sm text-white border-2 border-blue-500">Tôi</div>}
-                </div>
-            ))}
+            {activeConversation?.messages.map(msg => {
+                const messageContent = msg.parts.map((part, index) => {
+                    if ('text' in part) {
+                        return <p key={index} className="whitespace-pre-wrap">{part.text || '...'}</p>
+                    }
+                    if ('inlineData' in part && part.inlineData.mimeType.startsWith('image/')) {
+                        return <img key={index} src={`data:${part.inlineData.mimeType};base64,${part.inlineData.data}`} alt="Uploaded content" className="max-w-xs rounded-lg mt-2"/>
+                    }
+                    return null;
+                });
+
+                if (msg.role === 'model') {
+                    return (
+                        <div key={msg.id} className="flex items-start gap-3 w-full justify-start">
+                            <img src="https://lamyoutubeai.com/Image/logotool.png" alt="Lữ Khách logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />
+                            <div className="flex flex-col items-start">
+                               <span className="font-bold text-sm text-yellow-400 mb-1">Lữ Khách</span>
+                               <div className="p-3 rounded-lg max-w-3xl text-lg leading-relaxed bg-slate-700">
+                                   {messageContent}
+                               </div>
+                            </div>
+                        </div>
+                    );
+                }
+
+                if (msg.role === 'user') {
+                     return (
+                        <div key={msg.id} className="flex items-start gap-3 w-full justify-end">
+                            <div className="p-3 rounded-lg max-w-3xl text-lg leading-relaxed bg-blue-800 text-white">
+                                {messageContent}
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center font-semibold text-sm text-white border-2 border-blue-500">Tôi</div>
+                        </div>
+                     );
+                }
+                
+                return null;
+            })}
             <div ref={messagesEndRef} />
         </div>
 
@@ -284,7 +306,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                     onChange={(e) => setCurrentInput(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleLocalSendMessage(); } }}
                     onFocus={onChatFocus}
-                    placeholder="Nhập tin nhắn của bạn..."
+                    placeholder="Tôi đang chờ câu hỏi của bạn tại đây..."
                     className="flex-1 bg-transparent focus:outline-none resize-none text-lg p-2"
                     rows={1}
                     disabled={isSending}
