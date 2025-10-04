@@ -354,8 +354,8 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col bg-slate-900 text-gray-300 font-sans h-full rounded-lg border border-slate-700/50 overflow-hidden">
       <Header />
-      <main className="flex flex-1 overflow-hidden">
-        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-r border-slate-700/50">
+      <main className="flex flex-1 min-h-0">
+        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-r border-slate-700/50 overflow-y-auto">
           <ConversationSidebar 
             conversations={conversations}
             activeConversationId={activeConversationId}
@@ -365,7 +365,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="flex-1 flex flex-col bg-slate-800">
+        <div className="flex-1 flex flex-col bg-slate-800 min-h-0">
           <ChatbotView
             googleApiKey={googleApiKey}
             openAiApiKey={openAiApiKey}
@@ -380,7 +380,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-l border-slate-700/50">
+        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-l border-slate-700/50 overflow-y-auto">
           <SettingsTab />
         </div>
       </main>
