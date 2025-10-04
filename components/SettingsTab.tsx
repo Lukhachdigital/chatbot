@@ -97,7 +97,7 @@ const SettingsTab: React.FC = () => {
         </div>
         <div className="mt-6 flex justify-center">
             <img 
-                src="https://lamyoutubeai.com/Image/logotool.png" 
+                src="https://lamyoutubeai.com/image/logotool.png" 
                 alt="Làm Youtube AI Logo" 
                 className="w-28 h-28 object-cover rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/30 p-1 bg-slate-800" 
             />
