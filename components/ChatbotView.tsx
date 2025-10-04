@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import Button from './shared/Button';
 import Input from './shared/Input';
@@ -231,7 +232,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
             <ModelSelector selected={selectedModel} onSelect={onSelectModel} disabled={isSending} />
         </div>}
         
-        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto p-2 space-y-4">
             {!activeConversation && welcomeMessage}
             {activeConversation?.messages.map(msg => {
                 const messageContent = msg.parts.map((part, index) => {
@@ -274,7 +275,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
             <div ref={messagesEndRef} />
         </div>
 
-        <div className="p-4 border-t border-slate-700/50 bg-slate-800">
+        <div className="p-2 border-t border-slate-700/50 bg-slate-800">
             {attachedFile && (
                 <div className="mb-2 bg-slate-700 p-2 rounded-lg flex items-center justify-between animate-fade-in">
                     <div className="flex items-center gap-2 overflow-hidden">
