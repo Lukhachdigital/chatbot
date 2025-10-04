@@ -103,7 +103,7 @@ const SettingsTab: React.FC = () => {
             />
         </div>
 
-        <div className="mt-6">
+        <div className="mt-4">
           <div className="space-y-4">
             {videosLoading ? (
               Array.from({ length: 3 }).map((_, index) => (
