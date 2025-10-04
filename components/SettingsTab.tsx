@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 const SocialLink: React.FC<{ platform: string, url:string, handle: string, icon: React.ReactNode }> = ({ platform, url, handle, icon }) => (
@@ -103,8 +104,7 @@ const SettingsTab: React.FC = () => {
             />
         </div>
 
-        <div className="mt-8">
-          <h4 className="text-md font-bold text-white mb-3 text-center">Video chia sẻ mới nhất</h4>
+        <div className="mt-6">
           <div className="space-y-4">
             {videosLoading ? (
               Array.from({ length: 2 }).map((_, index) => (
