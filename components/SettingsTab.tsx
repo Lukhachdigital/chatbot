@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 
 const SocialLink: React.FC<{ platform: string, url:string, handle: string, icon: React.ReactNode }> = ({ platform, url, handle, icon }) => (
@@ -69,7 +68,7 @@ const SettingsTab: React.FC = () => {
         const data = await response.json();
         
         if (data.status === 'ok' && data.items) {
-          const videos = data.items.slice(0, 2).map((item: any) => ({
+          const videos = data.items.slice(0, 3).map((item: any) => ({
             id: item.guid.split(':')[2],
             title: item.title,
           }));
@@ -107,7 +106,7 @@ const SettingsTab: React.FC = () => {
         <div className="mt-6">
           <div className="space-y-4">
             {videosLoading ? (
-              Array.from({ length: 2 }).map((_, index) => (
+              Array.from({ length: 3 }).map((_, index) => (
                 <div key={index} className="aspect-video w-full bg-slate-700/50 rounded-lg flex items-center justify-center animate-pulse">
                    <p className="text-sm text-gray-400">Loading Video...</p>
                 </div>
