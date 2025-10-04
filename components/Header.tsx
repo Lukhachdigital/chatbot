@@ -3,7 +3,7 @@ import React from 'react';
 
 const Header: React.FC = () => {
   // Base styles for all buttons to ensure consistency in size, font, and interaction
-  const baseButtonClasses = "px-5 py-2.5 rounded-lg font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-lg transform hover:scale-105 transition-all duration-300 whitespace-nowrap flex items-center justify-center gap-2";
+  const baseButtonClasses = "px-5 py-2 rounded-lg font-bold text-base text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 shadow-lg transform hover:scale-105 transition-all duration-300 whitespace-nowrap flex items-center justify-center gap-2";
 
   // Unique styles for each button
   const curriculumButtonClasses = "bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 focus:ring-cyan-500 shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40";
@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
 
   return (
-    <header className="text-white py-3 px-6 flex items-center justify-between border-b border-slate-700/50 flex-shrink-0">
+    <header className="text-white py-2 px-4 flex items-center justify-between border-b border-slate-700/50 flex-shrink-0">
       <div className="flex-1 flex items-center min-w-0">
         <a href="https://lamyoutubeai.com" target="_blank" rel="noopener noreferrer" className="text-lg font-bold whitespace-nowrap flex-shrink-0">
           <span className="text-white">AI</span>
