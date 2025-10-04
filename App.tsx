@@ -92,7 +92,8 @@ const App: React.FC = () => {
           return acc;
       }, {} as Record<string, Omit<Conversation, 'chat'>>);
 
-      localStorage.setItem('chatbotConversations', JSON.stringify(conversationsTosave));
+      // FIX: Corrected typo from `conversationsTosave` to `conversationsToSave`.
+      localStorage.setItem('chatbotConversations', JSON.stringify(conversationsToSave));
     } catch (error) {
         console.error("Failed to save conversations to localStorage", error);
     }
