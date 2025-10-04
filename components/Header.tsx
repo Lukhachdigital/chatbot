@@ -1,6 +1,9 @@
+
 import React from 'react';
 
 const Header: React.FC = () => {
+  const buttonClasses = "px-6 py-2 rounded-md font-bold text-base text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-blue-500 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 transform hover:scale-110 transition-all duration-300 whitespace-nowrap";
+
   return (
     <header className="text-white py-3 px-6 flex items-center justify-between border-b border-slate-700/50 flex-shrink-0">
       <div className="flex-1 flex items-center min-w-0">
@@ -17,11 +20,23 @@ const Header: React.FC = () => {
         </p>
       </div>
 
-      <a href="https://lamyoutubeai.com/academy" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 mx-6">
-        <button className="px-6 py-2 rounded-md font-bold text-base text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-blue-500 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/50 transform hover:scale-110 transition-all duration-300">
-          Tham gia khóa học
-        </button>
-      </a>
+      <div className="flex items-center space-x-4 mx-6 flex-shrink-0">
+        <a href="https://lamyoutubeai.com/video-giao-trinh" target="_blank" rel="noopener noreferrer">
+          <button className={buttonClasses}>
+            Giáo trình bức phá
+          </button>
+        </a>
+        <a href="https://lamyoutubeai.com/mua-video-giao-trinh" target="_blank" rel="noopener noreferrer">
+          <button className={buttonClasses}>
+            Đăng ký thành viên
+          </button>
+        </a>
+        <a href="https://lamyoutubeai.com/support" target="_blank" rel="noopener noreferrer">
+          <button className={buttonClasses}>
+            Giải đáp - Hỗ trợ
+          </button>
+        </a>
+      </div>
       
       <p className="flex-1 text-lg font-semibold text-white text-left truncate">
         Chia sẻ kiến thức công nghệ AI
