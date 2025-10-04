@@ -33,11 +33,11 @@ const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col">
       <Button variant="secondary" onClick={onNewChat} className="w-full mb-2">
         + Trò chuyện mới
       </Button>
-      <div className="flex-grow overflow-y-auto pr-1">
+      <div className="pr-1">
         {Object.values(conversations)
           // FIX: Explicitly type 'a' and 'b' as 'Conversation' to allow accessing `id` for sorting.
           .sort((a: Conversation, b: Conversation) => parseInt(b.id.split('-')[1]) - parseInt(a.id.split('-')[1]))
