@@ -251,7 +251,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                             <img src="https://lamyoutubeai.com/image/logotool.png" alt="Lữ Khách logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />
                             <div className="flex flex-col items-start">
                                <span className="font-bold text-sm text-yellow-400 mb-1">Lữ Khách</span>
-                               <div className="p-3 rounded-lg max-w-3xl text-lg leading-relaxed bg-slate-700">
+                               <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-slate-700">
                                    {messageContent}
                                </div>
                             </div>
@@ -262,7 +262,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                 if (msg.role === 'user') {
                      return (
                         <div key={msg.id} className="flex items-start gap-3 w-full justify-end">
-                            <div className="p-3 rounded-lg max-w-3xl text-lg leading-relaxed bg-blue-800 text-white">
+                            <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-blue-800 text-white">
                                 {messageContent}
                             </div>
                             <div className="w-8 h-8 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center font-semibold text-sm text-white border-2 border-blue-500">Tôi</div>
@@ -308,7 +308,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleLocalSendMessage(); } }}
                     onFocus={onChatFocus}
                     placeholder="Tôi đang chờ câu hỏi của bạn tại đây..."
-                    className="flex-1 bg-transparent focus:outline-none resize-none text-lg p-2"
+                    className="flex-1 bg-transparent focus:outline-none resize-none p-2"
                     rows={1}
                     disabled={isSending}
                 />
