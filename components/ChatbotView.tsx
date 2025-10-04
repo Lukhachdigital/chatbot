@@ -212,7 +212,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
   
   const welcomeMessage = (
        <div className="flex-1 flex flex-col items-center justify-center text-center text-gray-400 p-4 space-y-2">
-            <p className="text-xl font-semibold text-gray-300">Tôi là Huỳnh Xuyên Sơn - Bạn cần tôi giúp về vấn đề gì?</p>
+            <p className="text-xl font-semibold text-gray-300">Tôi là <span className="text-yellow-400">Huỳnh Xuyên Sơn</span> - Bạn cần tôi giúp về vấn đề gì?</p>
             <p>Nhập tin nhắn bên dưới để bắt đầu một cuộc trò chuyện mới cùng tôi</p>
         </div>
   );
@@ -251,7 +251,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                             <img src="https://lamyoutubeai.com/image/logotool.png" alt="Huỳnh Xuyên Sơn logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />
                             <div className="flex flex-col items-start">
                                <span className="font-bold text-sm text-yellow-400 mb-1">Huỳnh Xuyên Sơn</span>
-                               <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-slate-700 text-sm">
+                               <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-slate-700 text-base">
                                    {messageContent}
                                </div>
                             </div>
@@ -262,7 +262,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                 if (msg.role === 'user') {
                      return (
                         <div key={msg.id} className="flex items-start gap-3 w-full justify-end">
-                            <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-blue-800 text-white text-sm">
+                            <div className="p-3 rounded-lg max-w-3xl leading-relaxed bg-blue-800 text-white text-base">
                                 {messageContent}
                             </div>
                             <div className="w-8 h-8 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center font-semibold text-sm text-white border-2 border-blue-500">Tôi</div>
@@ -308,7 +308,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                     onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleLocalSendMessage(); } }}
                     onFocus={onChatFocus}
                     placeholder="Tôi đang chờ câu hỏi của bạn tại đây..."
-                    className="flex-1 bg-transparent focus:outline-none resize-none p-2 text-sm"
+                    className="flex-1 bg-transparent focus:outline-none resize-none p-2 text-base"
                     rows={1}
                 />
                 <Button onClick={handleLocalSendMessage} disabled={isSending || (!currentInput.trim() && !attachedFile)} className="p-2 rounded-full h-10 w-10 flex items-center justify-center">
