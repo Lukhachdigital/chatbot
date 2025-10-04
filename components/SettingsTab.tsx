@@ -5,7 +5,7 @@ const SocialLink: React.FC<{ platform: string, url:string, handle: string, icon:
     href={url}
     target="_blank"
     rel="noopener noreferrer"
-    className="flex items-center space-x-2 p-2 bg-slate-900/50 hover:bg-slate-700/50 border border-slate-700 rounded-lg"
+    className="flex items-center space-x-2 p-2 bg-slate-900/50 hover:bg-slate-700/50 border border-slate-700 rounded-lg transition-colors duration-200"
   >
     <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
       {icon}
@@ -90,16 +90,16 @@ const SettingsTab: React.FC = () => {
     <div className="space-y-6">
       <div className="w-full">
         <div className="grid grid-cols-2 gap-3">
-          <SocialLink platform="Youtube" handle="@lukhach-digital" url="https://youtube.com/@lukhach-digital" icon={YoutubeIcon} />
-          <SocialLink platform="Facebook" handle="lukhach.com.vn" url="https://facebook.com/lukhach.com.vn" icon={FacebookIcon} />
-          <SocialLink platform="Tiktok" handle="@lukhach.com.vn" url="https://tiktok.com/@lukhach.com.vn" icon={TiktokIcon} />
+          <SocialLink platform="Youtube" handle="Làm Youtube AI" url="https://www.youtube.com/channel/UCwSbzgfgu1iMfOR__AB4QGQ?sub_confirmation=1" icon={YoutubeIcon} />
+          <SocialLink platform="Facebook" handle="huynhxuyenson" url="https://facebook.com/huynhxuyenson" icon={FacebookIcon} />
+          <SocialLink platform="Tiktok" handle="@lamyoutubeai" url="https://tiktok.com/@lamyoutubeai" icon={TiktokIcon} />
           <SocialLink platform="Zalo" handle="0979.007.367" url="https://zalo.me/0979007367" icon={ZaloIcon} />
         </div>
         <div className="mt-6 flex justify-center">
             <img 
                 src="https://lamyoutubeai.com/Image/logotool.png" 
                 alt="Làm Youtube AI Logo" 
-                className="w-32 h-32 object-cover rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/30 p-1 bg-slate-800" 
+                className="w-28 h-28 object-cover rounded-full border-2 border-blue-500 shadow-lg shadow-blue-500/30 p-1 bg-slate-800" 
             />
         </div>
 
@@ -108,7 +108,7 @@ const SettingsTab: React.FC = () => {
           <div className="space-y-4">
             {videosLoading ? (
               Array.from({ length: 2 }).map((_, index) => (
-                <div key={index} className="aspect-video w-full bg-slate-700/50 rounded-lg flex items-center justify-center">
+                <div key={index} className="aspect-video w-full bg-slate-700/50 rounded-lg flex items-center justify-center animate-pulse">
                    <p className="text-sm text-gray-400">Loading Video...</p>
                 </div>
               ))
