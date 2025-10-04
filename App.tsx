@@ -380,7 +380,7 @@ const App: React.FC = () => {
           />
         </div>
 
-        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-4 border-l border-slate-700/50">
+        <div className="w-[14.28%] flex-shrink-0 bg-slate-800/50 p-2 border-l border-slate-700/50">
           <SettingsTab />
         </div>
       </main>
