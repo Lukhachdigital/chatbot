@@ -247,7 +247,7 @@ const ChatbotView: React.FC<ChatbotViewProps> = ({
                 if (msg.role === 'model') {
                     return (
                         <div key={msg.id} className="flex items-start gap-3 w-full justify-start">
-                            <img src="https://lamyoutubeai.com/Image/logotool.png" alt="Lữ Khách logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />
+                            <img src="https://lamyoutubeai.com/image/logotool.png" alt="Lữ Khách logo" className="w-8 h-8 rounded-full flex-shrink-0 object-cover border-2 border-blue-500" />
                             <div className="flex flex-col items-start">
                                <span className="font-bold text-sm text-yellow-400 mb-1">Lữ Khách</span>
                                <div className="p-3 rounded-lg max-w-3xl text-lg leading-relaxed bg-slate-700">
