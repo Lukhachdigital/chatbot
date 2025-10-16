@@ -20,7 +20,8 @@ const App: React.FC = () => {
   const [selectedModel, setSelectedModel] = useState<ModelType>('gemini');
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const ai = useMemo(() => googleApiKey ? new GoogleGenAI({ apiKey: googleApiKey }) : null, [googleApiKey]);
+  // FIX: Initalize with API_KEY from environment variables
+  const ai = useMemo(() => googleApiKey ? new GoogleGenAI({ apiKey: process.env.API_KEY || googleApiKey }) : null, [googleApiKey]);
 
   // Effect 1: Load all persistent state from localStorage on initial mount
   useEffect(() => {
@@ -55,6 +56,7 @@ const App: React.FC = () => {
       // FIX: Explicitly type the destructured 'conv' parameter to ensure it's treated as a 'Conversation' object.
       // This resolves errors where properties like 'messages' and 'chat' were not recognized.
       const convsToUpdate = Object.entries(prevConvs)
+          // FIX: Explicitly typed 'conv' to resolve type inference issues on properties like 'messages' and when spreading.
           .filter(([, conv]: [string, Conversation]) => conv.messages && !conv.chat);
 
       if (convsToUpdate.length === 0) {
@@ -62,7 +64,7 @@ const App: React.FC = () => {
       }
 
       const updatedConvs = { ...prevConvs };
-      convsToUpdate.forEach(([convId, conv]) => {
+      convsToUpdate.forEach(([convId, conv]: [string, Conversation]) => {
           updatedConvs[convId] = {
               ...conv,
               chat: ai.chats.create({ 
@@ -86,6 +88,7 @@ const App: React.FC = () => {
     try {
       // FIX: Explicitly type the destructured 'value' parameter as 'Conversation' in the reduce callback.
       // This resolves the error when destructuring '{ chat, ...rest }' from 'value'.
+      // FIX: Explicitly typed 'value' to resolve destructuring error from 'unknown' type.
       const conversationsToSave = Object.entries(conversations).reduce((acc, [key, value]: [string, Conversation]) => {
           const { chat, ...rest } = value;
           acc[key] = rest;
@@ -211,7 +214,7 @@ const App: React.FC = () => {
         const chat = localCurrentConversation.chat || ai.chats.create({ model: 'gemini-2.5-flash', history: localCurrentConversation.messages.map(m => ({role: m.role, parts: m.parts})) });
         if (!localCurrentConversation.chat) updateConversation(localActiveConversationId, { chat });
 
-        const result = await chat.sendMessageStream({ message: userMessage.parts });
+        const result = await chat.sendMessageStream({ message: userMessage.parts.map(p => ('text' in p ? p.text : p)).join() });
         let accumulatedText = "";
         
         for await (const chunk of result) {
