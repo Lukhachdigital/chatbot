@@ -92,7 +92,7 @@ const SettingsTab: React.FC = () => {
         <SocialLink platform="Youtube" handle="Làm Youtube AI" url="https://www.youtube.com/channel/UCwSbzgfgu1iMfOR__AB4QGQ?sub_confirmation=1" icon={YoutubeIcon} />
         <SocialLink platform="Facebook" handle="huynhxuyenson" url="https://facebook.com/huynhxuyenson" icon={FacebookIcon} />
         <SocialLink platform="Tiktok" handle="@lamyoutubeai" url="https://tiktok.com/@lamyoutubeai" icon={TiktokIcon} />
-        <SocialLink platform="Zalo" handle="0979.007.367" url="https://zalo.me/0979007367" icon={ZaloIcon} />
+        <SocialLink platform="Zalo" handle="0979.007.367" url="https://zalo.me/g/fzzokk254" icon={ZaloIcon} />
       </div>
       <div className="mt-2 flex justify-center">
           <img 
